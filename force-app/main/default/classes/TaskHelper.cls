@@ -1,5 +1,5 @@
 public with sharing class TaskHelper {
-    public static void CheckOpenTasks(List<Task> newTasks, Map<Id, Task> oldTaskMap) {
+    public static void checkOpenTasks(List<Task> newTasks) {
         Set<Id> relatedCaseIds = new Set<Id>();             
         Map<Id, Task> oldTasksById = new Map<Id, Task>();
 
