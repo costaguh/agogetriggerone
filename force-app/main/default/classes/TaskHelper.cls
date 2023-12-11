@@ -3,7 +3,11 @@ public with sharing class TaskHelper {
         Set<Id> relatedCaseIds = new Set<Id>();             
         Map<Id, Task> oldTasksById = new Map<Id, Task>();
 
-        List<String> allowedStatus = new List<String>{'Not Started', 'In Progress', 'Waiting on someone else'};
+        List<String> allowedStatus = new List<String>{
+            'Not Started', 
+            'In Progress', 
+            'Waiting on someone else'
+        };
         
         for (Task newTask : newTasks) {
             relatedCaseIds.add(newTask.WhatId);
@@ -18,7 +22,7 @@ public with sharing class TaskHelper {
 
         for (Task newTask : newTasks) {            
             if(oldTasksById.containsKey(newTask.WhatId) && allowedStatus.contains(newTask.Status)) {                
-                newTask.addError('Já existe uma tarefa em aberto nesse caso. Encerre-a antes de abrir uma nova.');
+                newTask.addError(Label.Task_Error);
             }
         }
     }

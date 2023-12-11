@@ -13,10 +13,10 @@ public with sharing class TaskTriggerHandler {
     }
 
     public void beforeUpdate() {        
-        TaskHelper.CheckOpenTasks(this.newRecords, this.oldMap);        
+        TaskHelper.checkOpenTasks(this.newRecords);        
     }
 
     public void beforeInsert() {       
-        TaskHelper.CheckOpenTasks(this.newRecords, new Map<Id, Task>());
+        TaskHelper.checkOpenTasks(this.newRecords);
     }
 }
