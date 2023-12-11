@@ -12,10 +12,8 @@ public with sharing class TaskHelper {
             SELECT Id, WhatId, Status 
             FROM Task 
             WHERE Status IN :allowedStatus 
-            AND WhatId IN :relatedCaseIds]) 
-            {            
-                oldTasksById.put(openTask.WhatId, openTask);
-                System.debug(oldTasksById);
+            AND WhatId IN :relatedCaseIds]){            
+                oldTasksById.put(openTask.WhatId, openTask);                
             }
 
         for (Task newTask : newTasks) {            
