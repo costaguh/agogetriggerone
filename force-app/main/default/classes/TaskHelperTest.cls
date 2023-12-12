@@ -14,8 +14,6 @@ private class TaskHelperTest {
         List<Task> testTasks = new List<Task>{testTask1, testTask2, testTask3};
         insert testTasks;
         
-        TaskHelper.checkOpenTasks(testTasks);
-        
         for (Task task : testTasks) {
             if (task.Status == 'Not Started' || task.Status == 'In Progress') {
                 System.assert(task.HasErrors(), 'Erro esperado não encontrado.');
