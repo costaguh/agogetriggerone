@@ -5,13 +5,21 @@ public class Product2Helper {
         Id standardPricebookId = [SELECT Id FROM Pricebook2 WHERE IsStandard = true LIMIT 1].Id;
 
         for (Product2 product2 : products){
-            PricebookEntry newPricebookEntry = new PricebookEntry(
-                Pricebook2Id = standardPricebookId,
-                Product2Id = product2.Id,
-                CurrencyIsoCode = product2.CurrencyIsoCode,
-                UnitPrice = 0
-            );
-            listEntries.add(newPricebookEntry);
+            List<PricebookEntry> existingEntries = [
+                SELECT Id FROM PricebookEntry
+                WHERE Product2Id = :product2.Id
+                AND Pricebook2Id = :standardPricebookId                
+            ];
+
+            if (existingEntries.isEmpty()) {
+                PricebookEntry newPricebookEntry = new PricebookEntry(
+                    Pricebook2Id = standardPricebookId,
+                    Product2Id = product2.Id,
+                    CurrencyIsoCode = product2.CurrencyIsoCode,
+                    UnitPrice = 0
+                );
+                listEntries.add(newPricebookEntry);
+            }
         }
 
         if (!listEntries.isEmpty()) {
